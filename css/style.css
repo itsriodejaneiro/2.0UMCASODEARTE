@@ -831,7 +831,7 @@ footer .endereço {
 
 @media only screen and (max-height: 1500px) and (max-width: 900px) {
     .container-artigo.propriedade {
-        text-align: center;
+        box-align: center;
         height: 269px;
     }
 }
