@@ -55,28 +55,48 @@ function w3RemoveClass(element, name) {
   element.className = arr1.join(" ");
 }
 
-// Add active class to the current button (highlight it)
+// Código para adicionar a classe ativa ao botão clicado
 var btnContainer = document.getElementById("myBtnContainer");
 var btns = btnContainer.getElementsByClassName("btn");
+
 for (var i = 0; i < btns.length; i++) {
-  btns[i].addEventListener("click", function(){
+  btns[i].addEventListener("click", function() {
+// Remove a classe ativa do botão atualmente selecionado
     var current = document.getElementsByClassName("active");
-    current[0].className = current[0].className.replace(" active", "");
+    if (current.length > 0) {
+      current[0].className = current[0].className.replace(" active", "");
+    }
+
+// Adiciona a classe ativa ao botão clicado
     this.className += " active";
+
+// Envia um evento para o Google Analytics
+    gtag('event', 'button_click', {
+      'event_category': 'Button',
+      'event_label': this.innerText, // Usando o texto do botão como rótulo
+      'event_action': 'click'
+    });
   });
 }
 
+// Código para controle do consentimento de cookies
 (() => {
   if (!localStorage.pureJavaScriptCookies) {
     document.querySelector(".box-cookies").classList.remove('hide');
   }
-  
-  const acceptCookies = () => {
+
+    const acceptCookies = () => {
     document.querySelector(".box-cookies").classList.add('hide');
     localStorage.setItem("pureJavaScriptCookies", "accept");
+
+// Envia um evento para o Google Analytics indicando o consentimento
+    gtag('event', 'cookie_consent', {
+      'event_category': 'Cookie',
+      'event_label': 'Accepted',
+      'event_action': 'consent'
+    });
   };
-  
+
   const btnCookies = document.querySelector(".btn-cookies");
-  
   btnCookies.addEventListener('click', acceptCookies);
 })();
