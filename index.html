@@ -32,6 +32,15 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
+// Define a coleta de dados como "pending" até o consentimento
+        gtag('consent', 'default', {
+            'analytics_storage': 'denied'
+        });
+// Função para ativar o Analytics após o consentimento
+        function ativarAnalytics() {
+            gtag('consent', 'update', {
+                'analytics_storage': 'granted'
+            });
 
       gtag('config', 'G-P516K2DJTV');
     </script>
